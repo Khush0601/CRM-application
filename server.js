@@ -3,7 +3,14 @@ const express=require('express')
 const dbConfig=require('./configs/db.config')
 const app=express()
 const mongoose=require('mongoose')
+const bodyParser=require('body-parser')
 
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+
+// plugging the routes
+require("./routes/auth.routes")(app)
 
 // need to connect to database
 mongoose.connect(dbConfig.DB_URL)
