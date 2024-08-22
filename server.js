@@ -8,13 +8,13 @@ const mongoose=require('mongoose')
 // need to connect to database
 mongoose.connect(dbConfig.DB_URL)
 
-const db=mongoose.connection
+const db=mongoose.connection;
 db.on('error',()=>{
     console.log('error while connecting to DB')
 })
 
 db.once('open',()=>{
-    console.log('DB got connected')
+    console.log('connected to database')
 })
 app.listen(serverconfig.PORT,()=>{
     console.log('server started on port:',serverconfig.PORT)
