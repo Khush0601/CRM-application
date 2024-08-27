@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // plugging the routes
 require("./routes/auth.routes")(app)
+require("./routes/user.routes")(app)
+
 
 // need to connect to database
 mongoose.connect(dbConfig.DB_URL)
