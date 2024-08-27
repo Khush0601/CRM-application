@@ -45,8 +45,9 @@ exports.signUp=async(req,res)=>{
 
 exports.signIn=async(req,res)=>{
 try{
-    
+
     //read the userId and password from the req.
+    
     const userIdFromReq=req.body.userId
     const password=req.body.password
 
