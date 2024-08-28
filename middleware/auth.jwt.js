@@ -40,8 +40,22 @@ const isAdmin=async(req,res,next)=>{
         })
     }
 }
+
+const isAdminOrOwner=async(req,res,next)=>{
+    const callingUser=await userModel.findOne({userId:req.userId})
+    if(callingUser.userType=='ADMIN' || callingUser.userId==req.params.id){
+        next()
+    }
+    else{
+        return res.status(403).send({
+            message:'only admins or owner is allowed to update'
+        })
+    }
+
+}
 module.exports={
     verifyToken:verifyToken,
-    isAdmin:isAdmin
+    isAdmin:isAdmin,
+    isAdminOrOwner:isAdminOrOwner,
 
 }
