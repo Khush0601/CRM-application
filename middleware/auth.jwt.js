@@ -44,6 +44,11 @@ const isAdmin=async(req,res,next)=>{
 const isAdminOrOwner=async(req,res,next)=>{
     const callingUser=await userModel.findOne({userId:req.userId})
     if(callingUser.userType=='ADMIN' || callingUser.userId==req.params.id){
+        if(req.body.userStatus && callingUser.userType!='ADMIN'){
+            return res.status(403).send({
+                message:"only Admin is allowed to change the status"
+            })
+        }
         next()
     }
     else{

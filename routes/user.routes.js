@@ -6,4 +6,5 @@ module.exports=(app)=>{
     // app.get("/crm/api/v1/users",userController.findAll)
     // we r going to patch chained middleware blw route and controller
     app.get("/crm/api/v1/users",[auth.verifyToken,auth.isAdmin],userController.findAll)
+    app.put('/crm/api/v1/users',[auth.verifyToken,auth.isAdminOrOwner],userController.update)
 }

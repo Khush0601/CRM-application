@@ -32,6 +32,9 @@ res.status(500).send({
 exports.update=async(req,res)=>{
     //fetch the user object if its present 
     try{
+        if(!user){
+            return res.status(404).send({message:"user with the given id is not present"})
+        }
     const user=await userModel.findOne({userId:req.params.id})
    // update the user object based on the req
    user.name=req.body.name!=undefined?req.body.name:userModel.name;
@@ -50,5 +53,8 @@ exports.update=async(req,res)=>{
  }
     catch(err){
 console.log('error while updating the user',err.message)
+res.status(500).send({
+    message:'internal server erroe while updating the user'
+})
     }
 }
